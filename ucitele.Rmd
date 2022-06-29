@@ -1,0 +1,47 @@
+# Statistika - zápočtový úkol
+
+_Filip Ježek_
+
+V této práci se podívám na poměry mužských učitelů na středních a vyšších odborných školách mezi roky 2011 a 2021. Dále prozkoumám vývoj celkového počtu mužů ve vzdělávání ve stejném časovém intervalu. Data jsou z webu MŠMT (konkrétně [odsud](https://www.msmt.cz/vzdelavani/skolstvi-v-cr/statistika-skolstvi/genderova-problematika-zamestnancu-ve-skolstvi))
+
+## Příklad 1
+
+Konzervativní $H_0$ bude, že mužů učí na SŠ i VOŠ stejné procento. V souboru jsou uložené poměry mužů na SŠ a VOŠ.
+
+```{r}
+h0_ratio = 0.5
+data_gender = read.csv("gender.csv")
+ratios = with(data_gender, ss / (vos + ss))
+t.test(ratios, mu=h0_ratio)
+```
+
+Vidíme, že $H_0$ bychom měli zamítnout - p-hodnota je výrazně menší než 0.05.
+
+## Příklad 2
+
+Nyní se podívejme na to, zda spolu procento mužů na SŠ a VOŠ může korelovat - zajímá nás, zda se rozdíly mezi těmito poměry nějak výrazně mění.
+
+```{r}
+differences = with(data_gender, ss - vos)
+shapiro.test(differences)
+```
+
+Předpoklad, že rozdíly nejsou normálně rozložené, nemůžeme zamítnout.
+
+```{r}
+qqplot(data_gender$ss, data_gender$vos)
+```
+
+## Příklad 3
+
+Nakonec nás zajímá, jak se měnil počet mužů ve školství celkově (do dat jsou zahrnuti učitelé v předškolním vzdělávání, zš, sš, konzervatořích, voš a ostatních školách, tj. zuš a jazykovkách). Vysoké školy nemají povinnost tyto údaje zveřejňovat.
+
+```{r}
+men_data = read.csv("men.csv")
+linear = lm(muzi ~ rok, men_data)
+summary(linear)
+plot(muzi ~ rok, men_data)
+abline(reg=linear, col="red")
+```
+
+Vidíme, že počet mužů lze docela dobře aproximovat přímkou, a že ve školství pomalu ubývají.x

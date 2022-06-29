@@ -1,0 +1,45 @@
+data_gender = read.csv(./gender.csv)
+data_gender = read.csv(gender.csv)
+gender <- read.csv("~/skola/matfyz/past/gender.csv")
+View(gender)
+setwd("~/skola/matfyz/past")
+data_gender = read.csv(gender.csv)
+data_gender = read.csv(gender.csv)
+data_gender = read.csv(gender.csv)
+getwd()
+knit_with_parameters("~/skola/matfyz/past/ucitele.Rmd")
+unlink("ucitele_cache", recursive = TRUE)
+data_gender = read.csv("gender.csv")
+vyb_prumer
+data_gender = read.csv("gender.csv")
+ratios = data_gender$ss / (data_gender$vos + data_gender$ss)
+vyb_prumer = mean(ratios)
+vyb_rozptyl = var(ratios)
+vyb_prumer
+vyb_rozptyl
+data_gender = read.csv("gender.csv")
+ratios = data_gender$ss / (data_gender$vos + data_gender$ss)
+vyb_prumer = mean(ratios)
+vyb_rozptyl = var(ratios)
+vyb_prumer
+vyb_rozptyl
+?'t.test'
+t.test(ratios, mu=h0_ratio)
+ratios = data_gender$ss / (data_gender$vos + data_gender$ss)
+```{r}
+h0_ratio = 0.5
+data_gender = read.csv("gender.csv")
+ratios = data_gender$ss / (data_gender$vos + data_gender$ss)
+t.test(ratios, mu=h0_ratio)
+_Filip Ježek_
+t.test(data_gender$ss, data_gender$vos, paired = TRUE)
+t.test(data_gender$ss, data_gender$vos, paired = TRUE)
+?'with'
+differences = with(data_gender, ss - vos)
+shapiro.test(differences)
+plot(seq(2011, 2021), differences, xlab="Years")
+h0_ratio = 0.5
+data_gender = read.csv("gender.csv")
+ratios = with(data_gender, ss / (vos + ss))
+t.test(ratios, mu=h0_ratio)
+plot(seq(2011, 2021), differences, xlab="Years")
